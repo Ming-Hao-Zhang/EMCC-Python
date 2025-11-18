@@ -1,2 +1,31 @@
-# EMCC-Python
-A high-performance Python implementation of the Empirical Coupled-Channel (EMCC) model for nuclear fusion cross-sections.
+# EMCC-Python: High-Performance Implementation of the Empirical Coupled-Channel Model
+
+This repository contains an optimized Python implementation of the Empirical Coupled-Channel (EMCC) model, designed for the calculation of capture cross sections. This project represents a modernization of legacy Fortran source code, aiming to resolve significant computational bottlenecks.
+
+The primary contribution of this work is a dramatic improvement in computational efficiency. Through a combination of modern algorithmic restructuring and hardware-aware optimization, the execution time for complex potential surface scans has been reduced from approximately 7 hours in the original serial implementation to approximately 20 seconds in the current version. This speedup factor, exceeding 1200x, allows for rapid parameter sweeping and real-time data analysis that was previously infeasible.
+
+## Methodological Improvements and Optimization
+
+The performance gains were achieved through a multi-layered optimization strategy focusing on Just-In-Time (JIT) compilation, parallelization, and algorithmic refinement.
+
+First, the core physics kernels—specifically the nuclear density integration and the folding potential calculations—were optimized using Numba. By utilizing the @njit decorator with fastmath enabled, these numerically intensive loops are compiled into optimized machine code via LLVM, effectively bypassing the Python interpreter overhead and achieving performance comparable to or exceeding compiled C/Fortran binaries. Vectorization techniques were further applied using NumPy broadcasting to handle batch calculations for distance arrays, minimizing explicit iteration.
+
+Second, the scanning of deformation parameters, which represents the most time-consuming component of the simulation, was parallelized. The implementation utilizes the ProcessPoolExecutor to distribute the workload across all available CPU cores. This replaces the strictly serial execution model of the legacy code, allowing for simultaneous computation of potential surface points.
+
+Third, the numerical algorithms for root-finding and integration were modernized. The inefficient manual step-loop methods used for locating the barrier radius and height were replaced with SciPy's implementation of Brent's method (brentq). This provides higher precision with significantly fewer function evaluations. Additionally, the numerical integration scheme was upgraded to a vectorized 3D Gauss-Legendre quadrature with precomputed nodes and weights, eliminating redundant runtime calculations.
+
+## Usage and Dependencies
+
+To execute this program, a Python environment (version 3.8 or higher) is required, along with the standard scientific computing stack: NumPy, SciPy, and Numba. These dependencies can be installed via standard package managers.
+
+The program relies on an input configuration file named "EMCCM.IN", which must be present in the root directory. This file specifies the necessary physical parameters, including mass, charge, deformation parameters, and the energy range for the simulation. Upon execution of the main script ("EMCC_optimized.py"), the code initializes the potential shape, computes the barrier distribution function, and performs the cross-section calculations.
+
+## Output Description
+
+The simulation generates several data files containing the calculation results. "CROSS.DAT" provides the calculated capture cross sections as a function of center-of-mass energy. "TRANS.DAT" contains the transmission coefficients. Additionally, a barrier renormalization file ("barrier_factor.txt") is generated or read to adjust the barrier height and width if necessary.
+
+## Author
+
+Minghao Zhang
+School of Physics and Astronomy
+Beijing Normal University
