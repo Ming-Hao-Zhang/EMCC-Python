@@ -23,9 +23,3 @@ The program relies on an input configuration file named "EMCCM.IN", which must b
 ## Output Description
 
 The simulation generates several data files containing the calculation results. "CROSS.DAT" provides the calculated capture cross sections as a function of center-of-mass energy. "TRANS.DAT" contains the transmission coefficients. Additionally, a barrier renormalization file ("barrier_factor.txt") is generated or read to adjust the barrier height and width if necessary.
-
-## Author
-
-Minghao Zhang
-School of Physics and Astronomy
-Beijing Normal University
