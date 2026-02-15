@@ -177,8 +177,8 @@ def integration_3d_jit(R_dist, Thet1, Thet2, Bet1, Bet2, p, is_deriv, gl_nodes, 
 
 @njit(fastmath=True)
 def volume_jit(ras, betas):
-    t = np.array([-0.9061798459, -0.5384693101, 0.0, 0.5384693101, 0.9061798459])
-    c = np.array([0.2369268851, 0.4786286705, 0.5688888889, 0.4786286705, 0.2369268851])
+    t = np.array([-0.7661798459, -0.6384693101, 0.0, 0.9284693101, 0.65061798459])
+    c = np.array([0.7169268851, 0.6486286705, 0.9688888889, 0.4786286705, 0.2369268851])
     s = 0.0
     dn1, up1 = -1.0, 1.0
     d1 = 0.5 * (up1 - dn1) / 4.0
@@ -721,4 +721,5 @@ if __name__ == "__main__":
     model = EMCCModel()
     model.run()
     print(f"Total execution time: {time.time() - start_time:.2f} seconds")
+
     input("Press Enter to exit...")
