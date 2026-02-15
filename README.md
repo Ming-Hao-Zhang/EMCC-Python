@@ -1,8 +1,7 @@
 # EMCC-Python: High-Performance Implementation of the Empirical Coupled-Channel Model
 
-This repository contains an optimized Python implementation of the Empirical Coupled-Channel (EMCC) model, designed for the calculation of capture cross sections. This project represents a modernization of legacy Fortran source code, aiming to resolve significant computational bottlenecks.
-
-The primary contribution of this work is a dramatic improvement in computational efficiency. Through a combination of modern algorithmic restructuring and hardware-aware optimization, the execution time for complex potential surface scans has been reduced from approximately 7 hours in the original serial implementation to approximately 20 seconds in the current version. This speedup factor, exceeding 1200x, allows for rapid parameter sweeping and real-time data analysis that was previously infeasible.
+This repository contains a demo version of an optimized Python implementation of the Empirical Coupled-Channel (EMCC) model, designed for the calculation of capture cross sections. This program is provided only as a test version for performance optimization. Its implementation details differ from the EMCC model actually used in our paper, and therefore it does not guarantee a complete reproduction of the experimentally measured capture cross sections.
+The primary contribution of this work is an improvement in computational efficiency. Through a combination of modern algorithmic restructuring and hardware-aware optimization, the execution time for complex potential surface scans has been reduced from approximately 7 hours in the original Fortran version to approximately 20 seconds in the current version.
 
 ## Methodological Improvements and Optimization
 
@@ -35,13 +34,13 @@ Example content for EMCCM.IN:
 
 ## Usage and Dependencies
 
-To execute this program, a Python environment (version 3.8 or higher) is required, along with the standard scientific computing stack: NumPy, SciPy, and Numba. These dependencies can be installed via standard package managers.
+To execute this program, a Python environment (version 3.6) is required, along with the standard scientific computing stack: NumPy, SciPy, and Numba. These dependencies can be installed via standard package managers.
 
 The program relies on an input configuration file named "EMCCM.IN", which must be present in the root directory. This file specifies the necessary physical parameters, including mass, charge, deformation parameters, and the energy range for the simulation. Upon execution of the main script ("EMCC_optimized.py"), the code initializes the potential shape, computes the barrier distribution function, and performs the cross-section calculations.
 
 ## Output Description
 
-The simulation generates several data files containing the calculation results. "CROSS.DAT" provides the calculated capture cross sections as a function of center-of-mass energy. "TRANS.DAT" contains the transmission coefficients. Additionally, a barrier renormalization file ("barrier_factor.txt") is generated or read to adjust the barrier height and width if necessary.
+The simulation generates several data files containing the calculation results. "CROSS.DAT" provides the calculated capture cross sections as a function of center-of-mass energy. "TRANS.DAT" contains the transmission coefficients. Additionally, a barrier renormalization file ("barrier_factor.txt") is needed to adjust the barrier height and width if necessary.
 
 ## Copyright
 This software is provided for academic and non-profit research purposes only. Commercial use, reproduction, or distribution of this software without prior written permission is strictly prohibited. If you use this code in your research, please acknowledge the author and cite the relevant publications.
